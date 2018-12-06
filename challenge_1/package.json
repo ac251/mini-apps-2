@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "json-server": "json-server --watch ./data/db.json --static ./public/",
+    "json-server": "json-server --watch ./data/newdb.json --static ./public/",
     "build": "webpack",
     "build-dev": "webpack -w -d"
   },
