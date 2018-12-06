@@ -3,14 +3,21 @@ import Moment from 'moment';
 
 const EventDisplay = ({ event }) => {
   const { date, description } = event;
+  const dateSegments = date.split('/');
+  let displayDate;
+  if (dateSegments.length === 1) {
+    displayDate = parseInt(dateSegments[0], 10) > 0
+      ? dateSegments[0]
+      : `${-parseInt(dateSegments[0], 10)} BC`;
+  } else {
+    displayDate = Moment(date).format('MMMM Do YYYY');
+  }
   return (
     <div>
       <div>
-        {Moment(date)}
+        {displayDate}
       </div>
-      <div>
-        {description}
-      </div>
+      <div dangerouslySetInnerHTML={{ __html: description.split(/\{\{[^]\}\}/) }} />
     </div>
   );
 };
