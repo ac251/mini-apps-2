@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   changePages({ selected }) {
-    this.setState({ page: selected }, this.updateResults);
+    this.setState({ page: selected + 1 }, this.updateResults);
   }
 
   updateResults() {
@@ -59,10 +59,12 @@ class App extends React.Component {
         {numResults > 10
           ? (
             <ReactPaginate
+              containerClassName="paginate"
               pageCount={Math.ceil(numResults / 10)}
               pageRangeDisplayed={5}
               marginPagesDisplayed={1}
               onPageChange={page => this.changePages(page)}
+              activeClassName="page-chosen"
             />
           )
           : null

@@ -3,3 +3,17 @@
   padding: 5px;
   margin: 5px;
 }
+
+.page-chosen {
+  border: 1px solid dimgray;
+}
+
+.paginate {
+  display: flex;
+  flex-direction: row;
+}
+
+.paginate li {
+  padding: 10px;
+  display: block;
+}
