@@ -18,12 +18,7 @@ class App extends React.Component {
 
   search(e) {
     if (e) { e.preventDefault(); }
-    const { searchInput, page } = this.state;
-    requests.getEntries(searchInput, page)
-      .then(({ numResults, data }) => {
-        this.setState({ numResults, data });
-      })
-      .catch(err => console.log(err));
+    this.setState({ page: 1 }, this.updateResults);
   }
 
   handleInputChange(e) {
@@ -33,7 +28,19 @@ class App extends React.Component {
   }
 
   changePages({ selected }) {
-    this.setState({ page: selected }, this.search);
+    this.setState({ page: selected }, this.updateResults());
+  }
+
+  updateResults() {
+    const { searchInput, page } = this.state;
+    requests.getEntries(searchInput, page)
+      .then(({ numResults, data }) => {
+        this.setState({
+          numResults,
+          data,
+        });
+      })
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -53,7 +60,7 @@ class App extends React.Component {
           pageCount={Math.ceil(numResults / 10)}
           pageRangeDisplayed={5}
           marginPagesDisplayed={1}
-          onPageChange={data => this.changePages(data)}
+          onPageChange={page => this.changePages(page)}
         />
       </div>
     );
