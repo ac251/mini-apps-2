@@ -7,6 +7,9 @@ export default {
         q: searchTerm,
         _page: page,
       },
+      headers: {
+        'Cache-Control': 'no-cache',
+      },
     })
       .then((res) => {
         const { data } = res;
@@ -17,7 +20,8 @@ export default {
   },
 
   updateEntry(id, data) {
-    return axios.patch(`/events/${id}`, {
+    return axios(`/events/${id}`, {
+      method: 'PUT',
       data,
       headers: { 'Content-Type': 'application/json' },
     })

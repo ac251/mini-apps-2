@@ -17,3 +17,11 @@
   padding: 10px;
   display: block;
 }
+
+input, label, button, textarea {
+  margin: 5px;
+}
+
+textarea {
+  resize: none;
+}

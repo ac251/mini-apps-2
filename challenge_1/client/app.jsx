@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 import Search from './Search';
 import EventDisplay from './EventDisplay';
+import EditForm from './EditForm'
 import requests from './requests';
 
 class App extends React.Component {
@@ -13,6 +14,7 @@ class App extends React.Component {
       data: [],
       page: 1,
       numResults: 0,
+      editing: null,
     };
   }
 
@@ -43,9 +45,49 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
+  submitEdit(id, update) {
+    const { data, editing } = this.state;
+    const oldItem = data[editing];
+    const itemToSubmit = Object.assign({}, oldItem, update);
+    requests.updateEntry(id, itemToSubmit)
+      .then(() => {
+        this.updateResults();
+        this.setState({ editing: null });
+      })
+      .catch(err => console.log(err));
+  }
+
+  edit(idx) {
+    this.setState({ editing: idx });
+  }
+
   render() {
-    const { searchInput, data, numResults } = this.state;
-    const events = data.map(item => <EventDisplay event={item} />);
+    const {
+      searchInput,
+      data,
+      numResults,
+      editing,
+    } = this.state;
+    const events = data.map((item, idx) => (
+      <EventDisplay
+        event={item}
+        edit={() => this.edit(idx)}
+      />
+    ));
+    let editForm;
+    if (editing === null) {
+      editForm = null;
+    } else {
+      const itemToEdit = data[editing];
+      editForm = (
+        <EditForm
+          description={itemToEdit.description}
+          date={itemToEdit.date}
+          id={itemToEdit.id}
+          edit={(id, update) => this.submitEdit(id, update)}
+        />
+      );
+    }
     return (
       <div>
         <Search
@@ -69,6 +111,7 @@ class App extends React.Component {
           )
           : null
         }
+        {editForm}
       </div>
     );
   }

@@ -16,20 +16,32 @@ class EditForm extends React.Component {
     });
   }
 
+  submit(e) {
+    const { edit, id } = this.props;
+    const { description, date } = this.state;
+    e.preventDefault();
+    edit(id, { description, date });
+  }
+
   render() {
-    const { description, date, id } = this.state;
-    const { submit } = this.props;
+    const { description, date } = this.state;
     return (
       <form id="edit">
         <label htmlFor="date">
           date
-          <input type="text" name="date" value={date} />
+          <input type="text" name="date" value={date} onChange={e => this.changeInput(e)} />
         </label>
         <label htmlFor="description" form="edit">
           description
-          <textarea name="description" value={description} />
+          <textarea
+            rows="5"
+            cols="40"
+            name="description"
+            value={description}
+            onChange={e => this.changeInput(e)}
+          />
         </label>
-        <button type="submit" onClick={id => submit(id)}>
+        <button type="submit" onClick={e => this.submit(e)}>
           submit edits
         </button>
       </form>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Moment from 'moment';
 
-const EventDisplay = ({ event }) => {
+const EventDisplay = ({ event, edit }) => {
   const { date, description } = event;
   const dateSegments = date.split('/');
   let displayDate;
@@ -18,6 +18,7 @@ const EventDisplay = ({ event }) => {
         {displayDate}
       </div>
       <div dangerouslySetInnerHTML={{ __html: description.split(/\{\{[^]*\}\}/) }} />
+      <button type="button" onClick={edit}>edit</button>
     </div>
   );
 };
