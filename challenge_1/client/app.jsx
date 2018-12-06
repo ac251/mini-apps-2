@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   changePages({ selected }) {
-    this.setState({ page: selected }, this.updateResults());
+    this.setState({ page: selected }, this.updateResults);
   }
 
   updateResults() {
