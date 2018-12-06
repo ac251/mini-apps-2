@@ -17,7 +17,7 @@ const EventDisplay = ({ event }) => {
       <div>
         {displayDate}
       </div>
-      <div dangerouslySetInnerHTML={{ __html: description.split(/\{\{[^]\}\}/) }} />
+      <div dangerouslySetInnerHTML={{ __html: description.split(/\{\{[^]*\}\}/) }} />
     </div>
   );
 };
