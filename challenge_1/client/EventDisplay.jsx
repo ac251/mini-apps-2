@@ -13,7 +13,7 @@ const EventDisplay = ({ event }) => {
     displayDate = Moment(date).format('MMMM Do YYYY');
   }
   return (
-    <div>
+    <div className="event">
       <div>
         {displayDate}
       </div>

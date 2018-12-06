@@ -56,12 +56,17 @@ class App extends React.Component {
         <div>
           {events}
         </div>
-        <ReactPaginate
-          pageCount={Math.ceil(numResults / 10)}
-          pageRangeDisplayed={5}
-          marginPagesDisplayed={1}
-          onPageChange={page => this.changePages(page)}
-        />
+        {numResults > 10
+          ? (
+            <ReactPaginate
+              pageCount={Math.ceil(numResults / 10)}
+              pageRangeDisplayed={5}
+              marginPagesDisplayed={1}
+              onPageChange={page => this.changePages(page)}
+            />
+          )
+          : null
+        }
       </div>
     );
   }
