@@ -76,6 +76,11 @@ class App extends React.Component {
       <div>
         <canvas width="400" height="400" ref={this.chart} />
         <div>
+          <a href="https://www.coindesk.com/price/">
+            powered by CoinDesk
+          </a>
+        </div>
+        <div>
           select a new date range
         </div>
         <label>
