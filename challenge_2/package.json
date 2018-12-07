@@ -6,6 +6,7 @@
   "dependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "axios": "^0.18.0",
     "babel-loader": "^8.0.4",
     "chart.js": "^2.7.3",
     "express": "^4.16.4",
@@ -24,7 +25,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "react-dev": "webpack -w -d"
   },
   "author": "",
   "license": "ISC"
