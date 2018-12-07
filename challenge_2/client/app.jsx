@@ -21,21 +21,7 @@ class App extends React.Component {
       params,
     })
       .then(res => {
-        const { bpi } = res.data;
-        const data = []
-        for (let date in bpi) {
-          data.push([date, bpi[date]]);
-        }
-        data.sort((a, b) => {
-          for (let i = 0; i < 3; i++) {
-            const aNum = parseInt(a[0][i]);
-            const bNum = parseInt(b[0][i]);
-            if (aNum - bNum) {
-              return aNum - bNum;
-            }
-          }
-          return 0;
-        });
+        const { data } = res;
         this.setState({ data }, this.makeChart);
       })
       .catch(err => console.log(err));
@@ -45,7 +31,6 @@ class App extends React.Component {
     this.setState({ [e.target.name]: e.target.value }, () => {
       const { start, end } = this.state;
       if (start.length && end.length) {
-        console.log(this.state);
         this.getData();
       }
     });
@@ -53,7 +38,6 @@ class App extends React.Component {
 
   makeChart() {
     const { data } = this.state;
-    console.log(data);
     const chart = new Chart(this.chart.current, {
       type: 'line',
       data: {
