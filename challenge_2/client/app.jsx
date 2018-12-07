@@ -22,6 +22,7 @@ class App extends React.Component {
     })
       .then(res => {
         const { data } = res;
+        console.log(data);
         this.setState({ data }, this.makeChart);
       })
       .catch(err => console.log(err));
