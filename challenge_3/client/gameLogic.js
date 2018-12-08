@@ -8,6 +8,9 @@ class Frame {
   }
 
   roll(pins) {
+    if (this.rollsLeftToCount === 0) {
+      return;
+    }
     if (pins === 10 && this.rolls === 0) {
       this.status = 'strike';
       this.rollsLeftToCount += 1;
@@ -65,6 +68,15 @@ class BowlingGame {
         this.gameOver = true;
       }
     }
+    return {
+      score: this.score,
+      frames: this.frames.map(frame => ({
+        status: frame.status,
+        score: 10 - frame.pinsLeft,
+      })),
+      gameOver: this.gameOver,
+      currentFrame: this.currentFrame,
+    };
   
   }
 }
